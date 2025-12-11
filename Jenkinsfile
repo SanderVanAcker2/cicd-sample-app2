@@ -1,4 +1,4 @@
-node {
+pipeline {
     agent any
     triggers {
         githubPush()
@@ -11,10 +11,14 @@ node {
             }
         }
         stage('Build') {
-            build 'BuildSampleApp'
+            steps {
+                build job: 'BuildSampleApp'
+            }
         }
         stage('Results') {
-            build 'TestSampleApp'
+            steps {
+        build job: 'TestSampleApp'
+            }
         }
     }
 }
